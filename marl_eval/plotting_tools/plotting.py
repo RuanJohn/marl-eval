@@ -65,6 +65,7 @@ def performance_profiles(
     upper_algo_dict = {algo.upper(): value for algo, value in data_dictionary.items()}
     data_dictionary = upper_algo_dict
     algorithms = list(data_dictionary.keys())
+    algorithms.sort(reverse=True)
 
     if legend_map is not None:
         legend_map = {algo.upper(): value for algo, value in legend_map.items()}
@@ -73,6 +74,7 @@ def performance_profiles(
             legend_map[algo]: value for algo, value in data_dictionary.items()
         }
         algorithms = list(data_dictionary.keys())
+        algorithms.sort(reverse=True)
 
     if metric_name in metrics_to_normalize:
         xlabel = "Normalized " + " ".join(metric_name.split("_"))
@@ -140,6 +142,7 @@ def aggregate_scores(
     upper_algo_dict = {algo.upper(): value for algo, value in data_dictionary.items()}
     data_dictionary = upper_algo_dict
     algorithms = list(data_dictionary.keys())
+    algorithms.sort(reverse=True)
 
     if legend_map is not None:
         legend_map = {algo.upper(): value for algo, value in legend_map.items()}
@@ -148,6 +151,7 @@ def aggregate_scores(
             legend_map[algo]: value for algo, value in data_dictionary.items()
         }
         algorithms = list(data_dictionary.keys())
+        algorithms.sort(reverse=True)
 
     aggregate_func = lambda x: np.array(  # noqa: E731
         [
@@ -346,6 +350,7 @@ def sample_efficiency_curves(
     upper_algo_dict = {algo.upper(): value for algo, value in data_dictionary.items()}
     data_dictionary = upper_algo_dict
     algorithms = list(data_dictionary.keys())
+    algorithms.sort(reverse=True)
 
     if legend_map is not None:
         legend_map = {algo.upper(): value for algo, value in legend_map.items()}
@@ -354,6 +359,7 @@ def sample_efficiency_curves(
             legend_map[algo]: value for algo, value in data_dictionary.items()
         }
         algorithms = list(data_dictionary.keys())
+        algorithms.sort(reverse=True)
 
     # Find lowest values from amount of runs that have completed
     # across all algorithms
@@ -441,6 +447,7 @@ def plot_single_task(
     task_mean_ci_data = upper_algo_dict
     algorithms = list(task_mean_ci_data.keys())
     algorithms.remove("extra")
+    algorithms.sort(reverse=True)
 
     if legend_map is not None:
         legend_map = {algo.upper(): value for algo, value in legend_map.items()}

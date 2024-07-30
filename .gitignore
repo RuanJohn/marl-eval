@@ -141,6 +141,7 @@ processed_*.json
 
 # Plots folder
 plots
+data
 
 # csv data
 *.csv
