@@ -148,3 +148,6 @@ data
 
 # latex tabular data
 *latex.txt
+
+# mac specifc files
+.DS_Store
