@@ -30,17 +30,18 @@ from marl_eval.utils.data_processing_utils import (
     data_process_pipeline,
 )
 
+base_folder_name = "matrax-climbing-full"
 ENV_NAME = "GeneralMatrax"
-SAVE_PDF = False
+SAVE_PDF = True
 
-data_dir = "data/gen-matrax-ppo/merged_data/metrics.json"
-png_plot_dir = "plots/gen-matrix-ppo/png/"
-pdf_plot_dir = "plots/gen-matrix-ppo/pdf/"
+data_dir = f"data/{base_folder_name}/merged_data/metrics.json"
+png_plot_dir = f"plots/{base_folder_name}/png/"
+pdf_plot_dir = f"plots/{base_folder_name}/pdf/"
 
 legend_map = {
-    "ff_mappo": "FF MAPPO",
-    "ff_ippo": "FF IPPO",
-    "ff_ppo_central": "FF PPO Central",
+    "ff_mappo": "MAPPO NN",
+    "ff_ippo": "IPPO NN",
+    "ff_ppo_central": "PPO Central NN",
 }
 
 ##############################
@@ -165,6 +166,7 @@ fig, _, _ = sample_efficiency_curves(  # type: ignore
     metric_name="mean_episode_return",
     metrics_to_normalize=METRICS_TO_NORMALIZE,
     legend_map=legend_map,
+    marker="",
 )
 fig.figure.savefig(
     f"{png_plot_dir}return_sample_effeciency_curve.png", bbox_inches="tight"

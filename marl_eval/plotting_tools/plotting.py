@@ -38,6 +38,7 @@ def performance_profiles(
     metric_name: str,
     metrics_to_normalize: List[str],
     legend_map: Optional[Dict[str, str]] = None,
+    sort_order_list: Optional[List[str]] = None,
 ) -> Figure:
     """Produces performance profile plots.
 
@@ -66,6 +67,8 @@ def performance_profiles(
     data_dictionary = upper_algo_dict
     algorithms = list(data_dictionary.keys())
     algorithms.sort(reverse=True)
+    if sort_order_list is not None:
+        algorithms = sort_order_list
 
     if legend_map is not None:
         legend_map = {algo.upper(): value for algo, value in legend_map.items()}
@@ -75,9 +78,11 @@ def performance_profiles(
         }
         algorithms = list(data_dictionary.keys())
         algorithms.sort(reverse=True)
+        if sort_order_list is not None:
+            algorithms = sort_order_list
 
     if metric_name in metrics_to_normalize:
-        xlabel = "Normalized " + " ".join(metric_name.split("_"))
+        xlabel = "Normalised " + " ".join(metric_name.split("_"))
 
     else:
         xlabel = " ".join(metric_name.split("_")).capitalize()
@@ -108,6 +113,7 @@ def aggregate_scores(
     tabular_results_file_path: str = "./aggregated_score",
     save_tabular_as_latex: Optional[bool] = False,
     legend_map: Optional[Dict[str, str]] = None,
+    sort_order_list: Optional[List[str]] = None,
 ) -> Tuple[Figure, Dict[str, Dict[str, int]], Dict[str, Dict[str, float]]]:
     """Produces aggregated score plots.
 
@@ -133,7 +139,7 @@ def aggregate_scores(
 
     if metric_name in metrics_to_normalize:
         data_dictionary = dictionary[f"mean_norm_{metric_name}"]
-        xlabel = "Normalized " + " ".join(metric_name.split("_"))
+        xlabel = "Normalised " + " ".join(metric_name.split("_"))
     else:
         data_dictionary = dictionary[f"mean_{metric_name}"]
         xlabel = " ".join(metric_name.split("_")).capitalize()
@@ -143,6 +149,8 @@ def aggregate_scores(
     data_dictionary = upper_algo_dict
     algorithms = list(data_dictionary.keys())
     algorithms.sort(reverse=True)
+    if sort_order_list is not None:
+        algorithms = sort_order_list
 
     if legend_map is not None:
         legend_map = {algo.upper(): value for algo, value in legend_map.items()}
@@ -152,6 +160,8 @@ def aggregate_scores(
         }
         algorithms = list(data_dictionary.keys())
         algorithms.sort(reverse=True)
+        if sort_order_list is not None:
+            algorithms = sort_order_list
 
     aggregate_func = lambda x: np.array(  # noqa: E731
         [
@@ -315,6 +325,8 @@ def sample_efficiency_curves(
     metrics_to_normalize: List[str],
     legend_map: Optional[Dict[str, str]] = None,
     xlabel: str = "Timesteps",
+    marker: str = "",
+    sort_order_list: Optional[List[str]] = None,
 ) -> Tuple[Figure, Dict[str, np.ndarray], Dict[str, np.ndarray]]:
     """Produces sample efficiency curve plots.
 
@@ -341,7 +353,7 @@ def sample_efficiency_curves(
 
     if metric_name in metrics_to_normalize:
         data_dictionary = dictionary[f"mean_norm_{metric_name}"]
-        ylabel = "Normalized " + " ".join(metric_name.split("_"))
+        ylabel = "Normalised " + " ".join(metric_name.split("_"))
     else:
         data_dictionary = dictionary[f"mean_{metric_name}"]
         ylabel = " ".join(metric_name.split("_")).capitalize()
@@ -351,6 +363,8 @@ def sample_efficiency_curves(
     data_dictionary = upper_algo_dict
     algorithms = list(data_dictionary.keys())
     algorithms.sort(reverse=True)
+    if sort_order_list is not None:
+        algorithms = sort_order_list
 
     if legend_map is not None:
         legend_map = {algo.upper(): value for algo, value in legend_map.items()}
@@ -360,6 +374,8 @@ def sample_efficiency_curves(
         }
         algorithms = list(data_dictionary.keys())
         algorithms.sort(reverse=True)
+        if sort_order_list is not None:
+            algorithms = sort_order_list
 
     # Find lowest values from amount of runs that have completed
     # across all algorithms
@@ -391,6 +407,7 @@ def sample_efficiency_curves(
         legend=algorithms,
         figsize=(15, 8),
         color_palette=cc.glasbey_category10,
+        marker=marker,
     )
 
     dictionary["extra"] = extra
@@ -407,6 +424,7 @@ def plot_single_task(
     xlabel: str = "Timesteps",
     legend_map: Optional[Dict[str, str]] = None,
     run_times: Optional[Dict[str, float]] = None,
+    sort_order_list: Optional[List[str]] = None,
 ) -> Figure:
     """Produces aggregated plot for a single task in an environment.
 
@@ -435,7 +453,7 @@ def plot_single_task(
     )
 
     if metric_name in metrics_to_normalize:
-        ylabel = "Normalized " + " ".join(metric_name.split("_"))
+        ylabel = "Normalised " + " ".join(metric_name.split("_"))
     else:
         ylabel = " ".join(metric_name.split("_")).capitalize()
 
@@ -448,6 +466,8 @@ def plot_single_task(
     algorithms = list(task_mean_ci_data.keys())
     algorithms.remove("extra")
     algorithms.sort(reverse=True)
+    if sort_order_list is not None:
+        algorithms = sort_order_list
 
     if legend_map is not None:
         legend_map = {algo.upper(): value for algo, value in legend_map.items()}

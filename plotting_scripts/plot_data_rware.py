@@ -30,23 +30,18 @@ from marl_eval.utils.data_processing_utils import (
     data_process_pipeline,
 )
 
+base_folder_name = "cent-experiments-rware"
 ENV_NAME = "RobotWarehouse"
-SAVE_PDF = False
+SAVE_PDF = True
 
-data_dir = "data/full-benchmark-update/merged_data/interim_seed_duplicated.json"
-png_plot_dir = "plots/full-benchmark-update/rware_no_retmat/png/"
-pdf_plot_dir = "plots/full-benchmark-update/rware_no_retmat/pdf/"
+data_dir = f"data/{base_folder_name}/merged_data/metrics.json"
+png_plot_dir = f"plots/{base_folder_name}/png/"
+pdf_plot_dir = f"plots/{base_folder_name}/pdf/"
 
 legend_map = {
-    "rec_mappo": "Rec MAPPO",
-    "rec_ippo": "Rec IPPO",
-    "ff_mappo": "FF MAPPO",
-    "ff_ippo": "FF IPPO",
-    "mat": "MAT",
-    # "retmat": "RetMAT",
-    "retmat_memory": "RetMAT Memory",
-    # "retmat_main_memory": "RetMAT Main Memory",
-    # "retmat_yarn_memory": "RetMAT Yarn Memory",
+    "ff_mappo": "MAPPO NN",
+    "ff_ippo": "IPPO NN",
+    "ff_ppo_central": "PPO Central NN",
 }
 
 ##############################
@@ -88,19 +83,9 @@ fig = probability_of_improvement(
     metric_name="mean_episode_return",
     metrics_to_normalize=METRICS_TO_NORMALIZE,
     algorithms_to_compare=[
-        ["retmat_memory", "mat"],
-        # ["mat", "ff_ippo"],
-        # ["mat", "rec_ippo"],
-        # ["mat", "ff_mappo"],
-        # ["mat", "rec_mappo"],
-        ["retmat_memory", "ff_ippo"],
-        ["retmat_memory", "rec_ippo"],
-        ["retmat_memory", "ff_mappo"],
-        ["retmat_memory", "rec_mappo"],
-        # ["retmat_main_memory", "retmat_yarn_memory"],
-        # ["retmat_memory", "mat"],
-        # ["retmat_memory", "retmat"],
-        # ["retmat_yarn_memory", "mat"],
+        ["ff_ppo_central", "ff_ippo"],
+        ["ff_ppo_central", "ff_mappo"],
+        ["ff_mappo", "ff_ippo"],
     ],
     legend_map=legend_map,
 )

@@ -22,14 +22,20 @@ def remove_retmat(data):
         # Iterate through each task_name
         for task_name, algorithms in list(tasks.items()):
             # If "retmat" is an algorithm under the current task, remove it
-            if "retmat" in algorithms:
-                del data[env_name][task_name]["retmat"]
+            if "ff_ippo" in algorithms:
+                del data[env_name][task_name]["ff_ippo"]
 
-            if "retmat_cont" in algorithms:
-                del data[env_name][task_name]["retmat_cont"]
-                # If the task becomes empty after removing "retmat", consider removing the task
-                # if not data[env_name][task_name]:
-                #     del data[env_name][task_name]
+            if "ff_mappo" in algorithms:
+                del data[env_name][task_name]["ff_mappo"]
+
+            if "ff_ppo_central" in algorithms:
+                del data[env_name][task_name]["ff_ppo_central"]
+
+            # if "retmat_cont" in algorithms:
+            #     del data[env_name][task_name]["retmat_cont"]
+            # If the task becomes empty after removing "retmat", consider removing the task
+            # if not data[env_name][task_name]:
+            #     del data[env_name][task_name]
             # Optionally, remove the env_name if it becomes empty
             # if not data[env_name]:
             #     del data[env_name]
@@ -47,7 +53,9 @@ def main(json_filename, new_json_filename):
 # json_filename = "./data/full-benchmark-update/merged_data/metrics_winrate_processed.json"
 # new_json_filename = "./data/full-benchmark-update/merged_data/metrics_winrate_processed_no_retmat.json"
 
-json_filename = "./data/full-benchmark-update/merged_data/interim_seed_duplicated.json"
-new_json_filename = "./data/full-benchmark-update/merged_data/interim_seed_duplicated.json"
+base_folder_name = "shadow-long-experiment"
+
+json_filename = f"./data/{base_folder_name}/merged_data/metrics.json"
+new_json_filename = f"./data/{base_folder_name}/merged_data/metrics.json"
 
 main(json_filename, new_json_filename)

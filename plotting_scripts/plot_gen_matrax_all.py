@@ -30,18 +30,39 @@ from marl_eval.utils.data_processing_utils import (
     data_process_pipeline,
 )
 
-base_folder_name = "explore-long-experiment"
-ENV_NAME = "GeneralMatrax"
+base_folder_name = "matrax-climbing-full"
+ENV_NAME = "Matrax"
 SAVE_PDF = True
 
 data_dir = f"data/{base_folder_name}/merged_data/metrics.json"
 png_plot_dir = f"plots/{base_folder_name}/png/"
 pdf_plot_dir = f"plots/{base_folder_name}/pdf/"
 
+# algo_sort_list = [
+#     "FF_IPPO_TABULAR",
+#     "FF_IPPO_TABULAR_SPLIT",
+#     "FF_PPO_CENTRAL_TABULAR",
+#     "FF_IPPO",
+#     "FF_MAPPO",
+#     "FF_PPO_CENTRAL",
+# ]
+
+# algo_sort_list = [
+#     "IPPO Tab - Separate Policies",
+#     "IPPO Tab - Shared Policy",
+#     "PPO Central Tab",
+#     "IPPO NN",
+#     "MAPPO NN",
+#     "PPO Central NN",
+# ]
+
 legend_map = {
     "ff_ippo_tabular_split": "IPPO Tab - Separate Policies",
     "ff_ippo_tabular": "IPPO Tab - Shared Policy",
     "ff_ppo_central_tabular": "PPO Central Tab",
+    "ff_mappo": "MAPPO NN",
+    "ff_ippo": "IPPO NN",
+    "ff_ppo_central": "PPO Central NN",
 }
 
 ##############################

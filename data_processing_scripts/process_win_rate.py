@@ -29,9 +29,11 @@ def adjust_win_rate(data):
     return data
 
 
+base_folder_name = "cent-experiments-smax"
+
 # Replace 'your_file.json' with your actual JSON file name
-json_filename = "./data/full-benchmark-update/merged_data/metrics_stepcount_processed.json"
-new_json_filename = "./data/full-benchmark-update/merged_data/metrics_winrate_processed.json"
+json_filename = f"./data/{base_folder_name}/merged_data/metrics.json"
+new_json_filename = f"./data/{base_folder_name}/merged_data/metrics.json"
 
 data = load_json(json_filename)
 processed_data = adjust_win_rate(data)
